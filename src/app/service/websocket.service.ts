@@ -10,7 +10,7 @@ import SockJS from 'sockjs-client';
   providedIn: 'root'
 })
 export class WebsocketService {
-  socket = new SockJS('http://localhost:8080/ws');
+  socket = new SockJS('http://localhost:8082/ws');
   stompClient = Stomp.over(this.socket);
 
   subscribe(topic: string, callback: any): void {

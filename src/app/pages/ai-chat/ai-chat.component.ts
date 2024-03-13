@@ -12,6 +12,7 @@ import { Client, Message, Stomp } from '@stomp/stompjs';
 import { Observable, Subject } from 'rxjs';
 import { WebsocketService } from '../../service/websocket.service';
 import SockJS from 'sockjs-client';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-ai-chat',
@@ -22,12 +23,21 @@ import SockJS from 'sockjs-client';
     MatFormFieldModule,
     MatDialogModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    CommonModule
   ],
   templateUrl: './ai-chat.component.html',
   styleUrl: './ai-chat.component.scss'
 })
 export class AiChatComponent implements OnInit{
+  username = sessionStorage.getItem('username');
+  showJoinedMessage: boolean = false; 
+  joinedMessage: string = '';
+
+  connectingElement: HTMLElement | null = document.querySelector('.connecting');
+
+  messages: string[] = [];
+  newMessage: string = '';
   constructor(
     private _stompService: WebsocketService
   ) {}
@@ -37,5 +47,24 @@ export class AiChatComponent implements OnInit{
       console.log('message received');
     })
   }
+  
+
+  sendMessage() {
+    if (this.newMessage.trim() !== '') {
+      console.log('Sending message:', this.newMessage);
+      this.messages.push(this.newMessage);
+      this.newMessage = '';
+    }
     
+  }
+
+  
+
+  
+
+  
 }
+  
+  
+    
+

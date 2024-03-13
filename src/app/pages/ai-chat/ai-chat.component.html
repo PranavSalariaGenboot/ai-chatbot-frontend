@@ -6,13 +6,21 @@
         <div class="connecting">
             Connecting...
         </div>
+        <div class="joined-message-container" *ngIf="showJoinedMessage"> 
+            <div class="joined-message">{{ joinedMessage }}</div> 
+        </div>
+       
         <ul id="messageArea">
+            <li *ngFor="let message of messages" [ngClass]="{'sent-message': true}">
+                {{ message }}
+            </li>
         </ul>
-        <form id="messageForm" name="messageForm">
+        
+        <form id="messageForm" (ngSubmit)="sendMessage()" #messageForm="ngForm">
             <div class="form-group">
                 <div class="input-group clearfix">
-                    <input type="text" id="message" placeholder="Type a message..." autocomplete="off" class="form-control"/>
-                    <button class="primary">Send</button>
+                    <input type="text" id="message" placeholder="Type a message..." autocomplete="off" class="form-control" [(ngModel)]="newMessage" name="message"/>
+                    <button type="submit" class="primary">Send</button>
                 </div>
             </div>
         </form>

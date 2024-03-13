@@ -34,6 +34,7 @@ export class AiChatComponent implements OnInit{
   ngOnInit(): void {
     this._stompService.subscribe('topic/public', (): any => {
       console.log('message received');
+      console.log('message received');
     })
   }
     
